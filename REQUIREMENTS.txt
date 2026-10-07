@@ -1,0 +1,4 @@
+# pythonIDE A14 spine figure. Hash floor stays stdlib.
+# Install: pip install -r requirements.txt
+# Floor matches hello_world.py 65454a9d. Installed here: 3.10.9
+matplotlib>=3.10.9
