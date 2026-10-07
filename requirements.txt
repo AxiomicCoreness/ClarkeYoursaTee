@@ -2,3 +2,5 @@
 # Install: pip install -r requirements.txt
 # Floor matches hello_world.py 65454a9d. Installed here: 3.10.9
 matplotlib>=3.10.9
+
+# Ascend stack: requirements-ascend.txt (commented; not the 1.8.1 CPU wheel)
