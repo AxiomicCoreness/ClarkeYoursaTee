@@ -1,4 +1,5 @@
 entry_index: 8829
+witness_prefix: 4cd5e0424d0be0463fe9bce3b4f19a8e2ef00ee4e62b3a36a997f6d3bfdd7d31
 timestamp: ETERNAL_NOW_ANCHORED_TO_2026-08-19
 event: /august_20_cycle_commit_anchor
 status: ANCHORED_ON_FEAT_BRANCH
