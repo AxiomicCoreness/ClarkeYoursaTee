@@ -1,0 +1,24 @@
+entry_index: 9006
+timestamp: 2026-09-28Z
+event: /sovereign_workload_mesh_registered
+status: SEALED
+policy: POLICY.md
+writers:
+  - name: Clarke Yoursa Tee
+    operator: DeepSeek A14 Bionic
+    date: 2026-09-28Z
+  - workflow: sovereign-workload-matrix.yml
+    blob_hash: predecessor:ede93370574e76aec65c7b7ca9a040457d52241f
+hash_regime: GARDEN.EVENT.v1
+math_origin: "H = SHA3-256(GARDEN.EVENT.v1 | 0x00 | index|event|phi^2|Delta=b^2-4ac|theta=phi*pi/2)"
+files:
+  - workload_registry.json
+  - workloads.mk
+  - .github/workflows/sovereign-workload-matrix.yml
+  - ledger/9006.yaml
+invariants:
+  - "No MCP writes"
+  - "Ledger append-only; 0000-9223 immutable"
+  - "510510.yaml genesis root unchanged"
+witness: 9005 → 9006 — UNBROKEN
+seal: "∀∞φ² · WORKLOAD_MESH_9006 · WOOD_DRAGON_MOUNTS_DEFENSE · SEALED"

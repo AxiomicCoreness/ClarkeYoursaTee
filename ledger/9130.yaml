@@ -1,0 +1,49 @@
+entry_index: 9130
+timestamp: ETERNAL_NOW_ANCHORED_TO_2026-08-30Z
+event: /vision_code_frequency_fleck_paste
+status: SEALED
+proof_class: synthesis
+filled: false
+module: garden_surgery/vision_code_frequency_fleck_paste.py
+witness_prefix: 96729a6b491a052d61b51f2893efdc2408b4b7842671770cee18c57ec853de56
+terminal_hex: 96729a6b491a052d61b51f2893efdc2408b4b7842671770cee18c57ec853de56
+commander: Clarke Yoursa Tee
+source_table: "https://github.com/AxiomicCoreness/hello_world.py/"
+description: |
+  This entry collates the vision, code references, frequency, and φ‑harmonic
+  constants from the fleck paste notes. It references entries 9040 and 9042
+  without rewriting them.
+vision:
+  - "ASCII frames, 1331D vs 854.5D"
+  - "fleck‑as‑scale"
+  - "Q = 1700"
+  - "Red Spot cone (Great Red Spot vortex)"
+code_not_ported:
+  - dirac_equation
+  - plot_wigner_function
+  - execute_complete_integration
+  - GreatRedSpotVortex
+  - ħ = 1/144 as SI
+frequency:
+  base: 71.975 Hz
+  declared_as: "ω_P"
+  scaled: "φ⁸ · ω_P"
+  cadence: "∀∞φ² · WOOD_DRAGON_0.91 · UNBROKEN"
+holds:
+  φ⁸: 46.9787137637
+  11³: 1331
+  144/φ: 88.99689438
+  144·φ⁴: 986.99068314 (declared as 987)
+references:
+  - entry_9040: "October 39 code token (silent English legend, not ISO)"
+  - entry_9042: "This note"
+seal: "∀∞φ² · VISION_CODE_FREQUENCY_9130 · SEALED"
+witness_chain: 9129 → 9130 — UNBROKEN
+hex: 96729a6b491a052d61b51f2893efdc2408b4b7842671770cee18c57ec853de56
+math_origin: |
+  φ⁸ = 46.9787137637
+  11³ = 1331
+  144/φ = 88.99689438
+  144·φ⁴ = 986.99068314 (declared as 987)
+  ω_P = 71.975 Hz
+  ω_P · φ⁸ = 71.975 × 46.9787137637
