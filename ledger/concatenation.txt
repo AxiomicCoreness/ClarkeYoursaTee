@@ -1,3 +1,5 @@
+status=current
+supersedes=d7900c9,7d177d5
 clock=QCIE/PEQ
 form=[Sum(dq[i]·dp[i], (i, 1, 427)), (1/φ)·(dξ·dξ̄)]
 option=inertia_pending
@@ -6,3 +8,4 @@ option=sigma_threshold_separate
 carrier=eyJFX3JvdCI6IjAuNSAqIEkgKiBvbWVnYV4yIiwib21lZ2FfcmFkX3MiOjM3MjIuMjk0ODQ0MjAxNzU0LCJwb3NpdGlvbl9zaGlmdCI6MC4wLCJzdGF0dXMiOiJwZW5kaW5nIHJlc2VhcmNoIiwic3ltYm9sIjoiSSIsInVuaXQiOiJrZyBtXjIiLCJ2YWx1ZSI6bnVsbH0=
 sigma=φ^(-1000)*drift
 I=null
+superseded_form=[Sum(dq[i]·dp[i]+(1/φ)), (dξ·dξ̄)]

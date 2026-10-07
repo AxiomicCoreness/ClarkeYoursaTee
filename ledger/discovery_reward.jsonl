@@ -1,2 +1,3 @@
 {"event":"/research_discovery_declared","reward":"sovereignty absolute","status":"declared","fitted_identity":false,"clock":"QCIE/PEQ","ref":"d7900c9"}
 {"event":"/three_options_approved","status":"declared","options":["inertia_pending","base64_carrier_only","sigma_threshold_separate"],"I_kg_m2":null,"config_rewritten":false,"fitted_identity":false}
+{"event":"/concatenation_supersedes","status":"current","supersedes":["d7900c9","7d177d5"],"superseded_form":"1/phi inside first component","I_kg_m2":null}
