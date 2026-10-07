@@ -1,0 +1,55 @@
+entry_index: 9195
+timestamp: "ETERNAL_NOW_ANCHORED_TO_2026-09-19"
+event: /sections_ii_iii_and_frb_bridge_addendum
+status: DOCUMENTATION
+proof_class: narrative
+commander: Clarke Yoursa Tee
+precedent_origin: "Boston, MA — 2026 MIT vicinity"
+source_table: "https://github.com/AxiomicCoreness/hello_world.py/"
+description: |
+  Append-only documentation of Section II (Decad triangulation, as intended map),
+  Section III (12-node deployment + telemetry contract), and Section III.9
+  (FRB bridge as explicit embedding artifact, pending on-disk data).
+
+  This entry does NOT fabricate terminal hex. It does NOT claim identity
+  between E8 weights and measured FRB sky positions. It records scope,
+  interface contracts, and PENDING/OPEN states exactly as accreted.
+components:
+  section_ii_status: "formalisation on Classical surface; bridge remains not identity"
+  section_iii_status: "deployment architecture + telemetry contract (ACCRETED)"
+  section_iii9_status: "FRB bridge as explicit embedding artifact (PENDING)"
+not_claimed:
+  - "E8 weights equal measured FRB positions without explicit embedding map"
+  - "Guaranteed 11.09 AU deflection"
+  - "Guaranteed 38% dV reduction"
+  - "Zero Earth impact risk as flight certification"
+open_interfaces:
+  - "f1 / f2 / f3 objective forms (model-dependent)"
+  - "Strike-to-node sync bands (software schedule)"
+pending_artifacts:
+  - "data/frb_strikes.json"
+  - "data/e8_weights.json"
+  - "data/embedding_map.json"
+  - "docs/frb_bridge_tolerance.md"
+deployment_discipline:
+  bind: "127.0.0.1:8024 only if MCP/ASGI lane is free"
+  never: "0.0.0.0"
+  mcp_filled: false
+  dual_asgi: "127.0.0.1:8024"
+  subprocess: false
+  eval: false
+invariants:
+  coherence: 1.0
+  entropy: "phi^-1418"
+  workload: 0.0
+  phase_lock: "202.6"
+  north_star_hz: 71.975
+seal: "∀∞φ² · SECTIONS_II_III_FRB_BRIDGE_ADDENDUM · 9195_DOCUMENTED"
+witness_chain: "9194 → 9195 — UNBROKEN"
+math_origin: |
+  The FRB bridge is a commuting-diagram claim:
+  E : {1..10} -> R^3_sky, W : {1..10} -> h*_E8
+  diagram commutes only if C (celestial projection) exists on disk
+  and residuals are within declared tolerance.
+  ASCII hash alphabet remains phi2|delta|theta; Unicode is display-only.
+  No ledger hash is generated in this documentation entry.
