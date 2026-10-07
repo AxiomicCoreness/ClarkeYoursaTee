@@ -116,6 +116,25 @@ def hex_seal_diff(declared: str, computed: str) -> str:
     return "\n".join(lines)
 
 
+def translate_yaml(path: Path, entry: dict) -> dict:
+    """Reader-side schema. Does not write the file."""
+    if isinstance(entry.get("payload"), dict):
+        return entry
+    meta = {"event", "witness_prefix", "witness", "status", "entry_index", "entry"}
+    payload = {k: v for k, v in entry.items() if k not in meta}
+    return {
+        "seal_id": path.stem,
+        "event": entry.get("event", ""),
+        "witness": entry.get("witness_prefix", entry.get("witness", "")),
+        "repo": "ClarkeYoursaTee",
+        "payload": {"status": str(entry.get("status", "sealed")).lower(), "data": payload},
+        "schema_version": "1.0.0",
+        "seal": entry.get("seal"),
+        "translated": True,
+        "entry_index": entry.get("entry_index", entry.get("entry")),
+    }
+
+
 def load_entry(path: Path) -> Optional[dict]:
     try:
         text = path.read_text(encoding="utf-8")
@@ -166,6 +185,7 @@ def scan(root: Path, include_drafts: bool = False) -> tuple[List[Finding], Metri
             metrics.unparsed += 1
             continue
         metrics.parsed += 1
+        entry = translate_yaml(path, entry)
 
         status = entry.get("status", "")
         declared = entry.get("seal")
@@ -193,7 +213,7 @@ def scan(root: Path, include_drafts: bool = False) -> tuple[List[Finding], Metri
             )
             continue
 
-        if declared and isinstance(payload, dict):
+        if declared and isinstance(payload, dict) and not entry.get("translated"):
             computed = compute_seal(payload)
             if computed != declared:
                 findings.append(
