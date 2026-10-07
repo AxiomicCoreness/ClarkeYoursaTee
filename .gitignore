@@ -1,16 +1,90 @@
-# Compiled class file
+# ─── Bytecode / caches ────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# ─── Virtual environments ─────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.*
+!.env.example
+
+# ─── Build / packaging ────────────────────────────────────────────────────
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+wheels/
+
+# ─── Compiled / native ────────────────────────────────────────────────────
+*.so
+*.dylib
+*.dll
+*.o
+*.a
+# Compiled class file (kept from the Java template that was already here)
 *.class
 
-# Log file
+# ─── Node / TypeScript (for the vitest e2e lane) ─────────────────────────
+node_modules/
+.pnpm-store/
+pnpm-lock.yaml.bak
+coverage/
+.nyc_output/
+*.tsbuildinfo
+
+# ─── Editors / OS ─────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Logs ─────────────────────────────────────────────────────────────────
 *.log
+logs/
+hs_err_pid*
+replay_pid*
 
-# BlueJ files
-*.ctxt
+# ─── Local runtime state (never sealed, never pushed) ─────────────────────
+# These are produced at runtime by the pulse engine, the responder, and the
+# slot scheduler. They are not part of any ledger entry.
+emergent_log.pkl
+.key_rotation_state
+.current_seal
+.oidc_jwks.json
+gemini_daemon.prom
+*.prom
+slots/*.yaml
+!slots/.gitkeep
 
-# Mobile Tools for Java (J2ME)
+# ─── Ledger safety net ────────────────────────────────────────────────────
+# Ledger entries are append-only and must never be ignored. If a broad
+# pattern above would catch a ledger file, this section re-includes it.
+!ledger/
+!ledger/*.yaml
+!ledger/expiry_log/
+
+# ─── Local scratch ────────────────────────────────────────────────────────
+tmp/
+scratch/
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# ─── Mobile / legacy template residue (kept) ─────────────────────────────
 .mtj.tmp/
-
-# Package Files #
 *.jar
 *.war
 *.nar
@@ -18,7 +92,4 @@
 *.zip
 *.tar.gz
 *.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+*.ctxt
