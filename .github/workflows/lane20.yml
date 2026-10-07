@@ -1,0 +1,13 @@
+name: lane20
+on:
+  workflow_dispatch:
+jobs:
+  predict:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: run lane20 twice
+        run: python3 scripts/run_predict.py
