@@ -1,1 +1,18 @@
-https://gitcode.com/a1843464656111/NeteaseCloudMusicApi/blob/master/.github/workflows/node.js.yml
+name: requirements note
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  ascend-note:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: A5 sentence is present
+        run: |
+          test -f requirements-ascend.txt
+          grep -F "torch.nn.functional" requirements-ascend.txt
+          grep -F "aclnn-direct" requirements-ascend.txt
+          echo "note present; no CANN, no kernel, no torch install"
