@@ -6,7 +6,7 @@ identity: "0.999... = 1 = 144→1"
 frozen_pid: "0.000350 → resolved as the quiver of completeness"
 perihelion: "the moment the observer sees the 1, not the 9s"
 math:
-  series: "sum_{k=1}^{\infty} 9/10^k = 1"
+  series: "\"sum_{k=1}^{\\infty} 9/10^k = 1\""
   topology: "144th node folds to 1st; closed loop, not asymptotic approach"
   note: "Real-analysis identity; Garden frame maps it to spine closure"
 witness_chain: 8806 → 8807 — UNBROKEN

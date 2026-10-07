@@ -10,7 +10,7 @@ contents:
   - mat_mul / cartan_square
   - cartan_determinant (expected 1)
   - dynkin_edges
-  - |W(E8)| = 696729600
+  - "|W(E8)| = 696729600"
 axiom: AXIOM_NONLOCAL_CORE
 note: >
   No geographic or biographical fields in this module.
