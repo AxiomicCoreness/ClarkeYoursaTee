@@ -11,6 +11,7 @@
 # ORIGIN:    bridge for docs/aklt_research_notes.md + AKLT e2e gates
 # LEDGER:    NO_GROWTH
 # GATE-FIX:  G10 uses _expm_i_pi_S (eigh on Hermitian S, not on iπS)
+# NOTE:      no scripts/ dependency — Python inlined via heredoc
 # ──────────────────────────────────────────────────────────────────────
 
 name: aklt-e2e
@@ -37,7 +38,9 @@ jobs:
       - name: hard assert
         run: |
           python3 - <<'PY'
-          import itertools, math, sys
+          import math
+          import sys
+
           import numpy as np
 
           TOL_EIG = 1e-9
@@ -70,8 +73,7 @@ jobs:
               return embed_site(A, i, N) @ embed_site(B, j, N)
 
           def aklt_hamiltonian(N, periodic):
-              dim = 3 ** N
-              H = np.zeros((dim, dim), dtype=complex)
+              H = np.zeros((3 ** N, 3 ** N), dtype=complex)
               bonds = [(k, k + 1) for k in range(N - 1)]
               if periodic and N > 2:
                   bonds.append((N - 1, 0))
@@ -79,18 +81,15 @@ jobs:
                   SS = (total_two_site_op(Sx, Sx, i, j, N)
                         + total_two_site_op(Sy, Sy, i, j, N)
                         + total_two_site_op(Sz, Sz, i, j, N))
-                  SS2 = SS @ SS
-                  H += (SS2 + 3.0 * SS + 2.0 * I3_embed(N)) / 6.0
+                  H += (SS @ SS + 3.0 * SS + 2.0 * I3_embed(N)) / 6.0
               return H
 
           def gate_G1():
-              comm = Sx @ Sy - Sy @ Sx
-              err = np.max(np.abs(comm - 1j * Sz))
+              err = np.max(np.abs(Sx @ Sy - Sy @ Sx - 1j * Sz))
               return err < TOL_ALG, f"max|[Sx,Sy]-iSz|={err:.3e}"
 
           def gate_G2():
-              S2op = Sx @ Sx + Sy @ Sy + Sz @ Sz
-              err = np.max(np.abs(S2op - 2.0 * I3))
+              err = np.max(np.abs(Sx @ Sx + Sy @ Sy + Sz @ Sz - 2.0 * I3))
               return err < TOL_ALG, f"max|S^2-2I|={err:.3e}"
 
           def gate_G3():
@@ -103,25 +102,23 @@ jobs:
               return ok, f"idem={idem:.2e} herm={herm:.2e} rank={rank}"
 
           def gate_G4_G5_G6(N=6):
-              H = aklt_hamiltonian(N, periodic=True)
-              ev = np.linalg.eigvalsh(H)
+              ev = np.linalg.eigvalsh(aklt_hamiltonian(N, periodic=True))
               e0, e1 = ev[0], ev[1]
               gap = e1 - e0
               ok = (abs(e0) < TOL_EIG) and (e0 > -TOL_EIG) and (gap > 1e-6)
               return ok, f"N={N} PBC E0={e0:.3e} E1={e1:.3e} gap={gap:.3e}"
 
           def gate_G7(N=4):
-              H = aklt_hamiltonian(N, periodic=False)
-              ev = np.linalg.eigvalsh(H)
+              ev = np.linalg.eigvalsh(aklt_hamiltonian(N, periodic=False))
               e0 = ev[0]
               deg = int(np.sum(np.abs(ev - e0) < 1e-6))
               return deg == 4, f"N={N} OBC E0={e0:.3e} deg={deg}"
 
           def gate_G8_G9():
-              Ap = math.sqrt(2.0/3.0) * np.array([[0.0,1.0],[0.0,0.0]], dtype=complex)
-              A0 = (1.0/math.sqrt(3.0)) * np.array([[-1.0,0.0],[0.0,1.0]], dtype=complex)
-              Am = math.sqrt(2.0/3.0) * np.array([[0.0,0.0],[-1.0,0.0]], dtype=complex)
-              T = np.zeros((4,4), dtype=complex)
+              Ap = math.sqrt(2.0/3.0) * np.array([[0.0, 1.0], [0.0, 0.0]], dtype=complex)
+              A0 = (1.0/math.sqrt(3.0)) * np.array([[-1.0, 0.0], [0.0, 1.0]], dtype=complex)
+              Am = math.sqrt(2.0/3.0) * np.array([[0.0, 0.0], [-1.0, 0.0]], dtype=complex)
+              T = np.zeros((4, 4), dtype=complex)
               for A in (Ap, A0, Am):
                   T += np.kron(A, A.conj())
               mags = np.sort(np.abs(np.linalg.eigvals(T)))[::-1]
@@ -134,18 +131,20 @@ jobs:
 
           def _expm_i_pi_S(S):
               w, V = np.linalg.eigh(S)
-              return V @ np.diag(np.exp(1j*math.pi*w)) @ V.conj().T
+              return V @ np.diag(np.exp(1j * math.pi * w)) @ V.conj().T
 
           def gate_G10():
-              Rs = {n: _expm_i_pi_S(S) for n, S in (("x",Sx),("y",Sy),("z",Sz))}
-              sq = {n: np.max(np.abs(R@R - I3)) for n, R in Rs.items()}
+              Rs = {n: _expm_i_pi_S(S)
+                    for n, S in (("x", Sx), ("y", Sy), ("z", Sz))}
+              sq = {n: np.max(np.abs(R @ R - I3)) for n, R in Rs.items()}
               cm = {
-                  "xy": np.max(np.abs(Rs["x"]@Rs["y"] - Rs["y"]@Rs["x"])),
-                  "xz": np.max(np.abs(Rs["x"]@Rs["z"] - Rs["z"]@Rs["x"])),
-                  "yz": np.max(np.abs(Rs["y"]@Rs["z"] - Rs["z"]@Rs["y"])),
+                  "xy": np.max(np.abs(Rs["x"] @ Rs["y"] - Rs["y"] @ Rs["x"])),
+                  "xz": np.max(np.abs(Rs["x"] @ Rs["z"] - Rs["z"] @ Rs["x"])),
+                  "yz": np.max(np.abs(Rs["y"] @ Rs["z"] - Rs["z"] @ Rs["y"])),
               }
               tol = 1e-10
-              ok = all(e < tol for e in sq.values()) and all(e < tol for e in cm.values())
+              ok = (all(e < tol for e in sq.values())
+                    and all(e < tol for e in cm.values()))
               return ok, f"sq={sq} comm={cm}"
 
           def aklt_dispatch() -> int:
