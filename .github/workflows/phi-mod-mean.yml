@@ -18,12 +18,25 @@ name: aklt-e2e
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/aklt-e2e.yml"
+      - "docs/aklt_research_notes.md"
+  pull_request:
+    paths:
+      - ".github/workflows/aklt-e2e.yml"
+      - "docs/aklt_research_notes.md"
 
 permissions:
   contents: read
 
+concurrency:
+  group: aklt-e2e-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   assert-aklt:
+    name: AKLT E2E — spin-1 algebra → MPS transfer
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -172,3 +185,23 @@ jobs:
 
           sys.exit(aklt_dispatch())
           PY
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### AKLT E2E"
+            echo ""
+            echo "| gate | subject |"
+            echo "|---|---|"
+            echo "| G1 | spin-1 algebra |"
+            echo "| G2 | spin-1 Casimir |"
+            echo "| G3 | pi_2 projector |"
+            echo "| G4/G5/G6 | PBC spectrum N=6 |"
+            echo "| G7 | OBC degeneracy N=4 |"
+            echo "| G8/G9 | MPS ξ = 1/ln 3 |"
+            echo "| G10 | hidden Z₂ × Z₂ |"
+            echo ""
+            echo "- ledger: NO_GROWTH"
+            echo "- wire: garden.spec / AKLT E2E"
+          } >> "$GITHUB_STEP_SUMMARY"
